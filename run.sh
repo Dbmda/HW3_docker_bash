@@ -14,6 +14,15 @@ case $1 in
         python generator/generator.py local_data
         ;;
     
+    build_reporter)
+        docker build -t kpop-reporter ./reporter
+        ;;
+
+    run_reporter)
+        mkdir -p data
+        docker run --rm -v "$(pwd)/data:/data" kpop-reporter
+        ;;
+        
     *)
         echo "Invalid command"
         ;;
