@@ -1,6 +1,6 @@
 #!/bin/bash
 
-case $1 in
+case "$1" in
 
     build_generator)
         docker build -t kpop-generator ./generator
@@ -22,7 +22,20 @@ case $1 in
         mkdir -p data
         docker run --rm -v "$(pwd)/data:/data" kpop-reporter
         ;;
-        
+    
+    structure)
+        find . -path ./.git -prune -o -print
+        ;;
+    clear_data)
+        rm -f data/*.csv data/*.html
+        ;;
+
+    inside_generator)
+        docker run --rm -v "$(pwd)/data:/data" kpop-generator ls -la /data
+        ;;
+    inside_reporter)
+        docker run --rm -v "$(pwd)/data:/data" kpop-reporter ls -la /data
+        ;;
     *)
         echo "Invalid command"
         ;;
