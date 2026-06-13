@@ -7,6 +7,7 @@ case "$1" in
         ;;
     
     run_generator)
+        mkdir -p data 
         docker run --rm -v "$(pwd)/data:/data" kpop-generator
         ;;
     create_local_data)
